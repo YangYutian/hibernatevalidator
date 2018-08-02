@@ -7,6 +7,7 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
+import java.util.Iterator;
 import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
@@ -23,21 +24,20 @@ public class CheckCaseTest {
     @Test
     public void test(){
         //invalid license plate
-        Car car = new Car( "Morris", "dd-ab-123", 4 );
-        Set<ConstraintViolation<Car>> constraintViolations =
-                validator.validate( car );
+        Car car = new Car( "Morris", "DD-ab-123", 4 );
+        Set<ConstraintViolation<Car>> constraintViolations = validator.validate( car );
 //        assertEquals( 1, constraintViolations.size() );
-        assertEquals(
-                "Case mode must be UPPER.",
-                constraintViolations.iterator().next().getMessage()
-        );
-
-//valid license plate
-//        car = new Car( "Morris", "DD-AB-123", 4 );
-//
-//        constraintViolations = validator.validate( car );
-//
-//        assertEquals( 0, constraintViolations.size() );
+//        assertEquals("Case mode must be UPPER.", constraintViolations.iterator().next().getMessage() );
+        Iterator<ConstraintViolation<Car>> it = constraintViolations.iterator();
+        while (it.hasNext()){
+            ConstraintViolation<Car> carConstraintViolation =  it.next();
+            String message = carConstraintViolation.getMessage();
+            System.out.println(message);
+        }
+        //valid license plate
+//     car = new Car( "Morris", "DD-AB-123", 4 );
+//     constraintViolations = validator.validate( car );
+//     assertEquals( 0, constraintViolations.size() );
     }
 
 
