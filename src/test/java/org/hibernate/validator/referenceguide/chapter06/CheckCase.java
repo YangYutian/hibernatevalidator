@@ -8,7 +8,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 @Target({ FIELD, METHOD, PARAMETER, ANNOTATION_TYPE, TYPE_USE })
 @Retention(RUNTIME)
-@Constraint(validatedBy = org.hibernate.validator.referenceguide.chapter06.constraintvalidatorcontext.CheckCaseValidator.class)
+@Constraint(validatedBy = org.hibernate.validator.referenceguide.chapter06.CheckCaseValidator.class)
 @Documented
 @Repeatable(CheckCase.List.class)
 public @interface CheckCase {

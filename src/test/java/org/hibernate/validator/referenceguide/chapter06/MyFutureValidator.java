@@ -24,4 +24,20 @@ public class MyFutureValidator implements HibernateConstraintValidator<MyFuture,
 //        this.orPresent = constraintDescriptor.getAnnotation().orPresent();
         this.clock = initializationContext.getClockProvider().getClock();
     }
+
+    public Clock getClock() {
+        return clock;
+    }
+
+    public void setClock(Clock clock) {
+        this.clock = clock;
+    }
+
+    public boolean isOrPresent() {
+        return orPresent;
+    }
+
+    public void setOrPresent(boolean orPresent) {
+        this.orPresent = orPresent;
+    }
 }

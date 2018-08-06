@@ -3,6 +3,7 @@ package org.hibernate.validator.referenceguide.chapter06;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 public class Car {
     @NotNull
@@ -10,16 +11,27 @@ public class Car {
 
     @NotNull
     @Size(min = 2, max = 14)
-    @CheckCase(CaseMode.LOWER)
+    @CheckCase(CaseMode.UPPER)
     private String licensePlate;
 
     @Min(2)
     private int seatCount;
 
+    @NotNull
+    private List<String> list;
+
     public Car(String manufacturer, String licencePlate, int seatCount) {
         this.manufacturer = manufacturer;
         this.licensePlate = licencePlate;
         this.seatCount = seatCount;
+    }
+
+    public List<String> getList() {
+        return list;
+    }
+
+    public void setList(List<String> list) {
+        this.list = list;
     }
 
     public String getManufacturer() {

@@ -22,7 +22,7 @@ public class CheckCaseTest {
     }
 
     @Test
-    public void test(){
+    public void test1(){
         //invalid license plate
         Car car = new Car( "Morris", "DD-ab-123", 4 );
         Set<ConstraintViolation<Car>> constraintViolations = validator.validate( car );
@@ -34,10 +34,19 @@ public class CheckCaseTest {
             String message = carConstraintViolation.getMessage();
             System.out.println(message);
         }
-        //valid license plate
-//     car = new Car( "Morris", "DD-AB-123", 4 );
-//     constraintViolations = validator.validate( car );
-//     assertEquals( 0, constraintViolations.size() );
+    }
+
+    @Test
+    public void test2(){
+       Car car = new Car( "Morris", "DD-AB-123", 4 );
+       Set<ConstraintViolation<Car>> constraintViolations = validator.validate(car);
+//       assertEquals( 0, constraintViolations.size() );
+        Iterator<ConstraintViolation<Car>> it = constraintViolations.iterator();
+        while (it.hasNext()){
+            ConstraintViolation<Car> carConstraintViolation =  it.next();
+            String message = carConstraintViolation.getMessage();
+            System.out.println(message);
+        }
     }
 
 

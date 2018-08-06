@@ -7,6 +7,7 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
+import java.util.Iterator;
 import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
@@ -21,12 +22,18 @@ public class CarTest {
     }
 
     @Test
-    public  void manufacturerIsNull(){
-//        Car car = new Car();
-//        car.addPart( "Wheel" );
-//        car.addPart( null );
-//
-//        Set<ConstraintViolation<Car>> constraintViolations = validator.validate( car );
+    public  void test1(){
+        Car car = new Car();
+        car.addPart( "Wheel" );
+        car.addPart( null );
+
+        Set<ConstraintViolation<Car>> constraintViolations = validator.validate( car );
+        Iterator<ConstraintViolation<Car>> it = constraintViolations.iterator();
+        while (it.hasNext()){
+            ConstraintViolation<Car> carConstraintViolation =  it.next();
+            String message = carConstraintViolation.getMessage();
+            System.out.println(message);
+        }
 //        assertEquals( 1, constraintViolations.size() );
 //
 //        ConstraintViolation<Car> constraintViolation =
@@ -40,5 +47,24 @@ public class CarTest {
 
 
 
+    }
+
+    @Test
+    public void test2(){
+        Car car = new Car();
+        car.addPart( "Wheel" );
+        car.addPart( null );
+        Set<ConstraintViolation<Car>> constraintViolations = validator.validate( car );
+        Iterator<ConstraintViolation<Car>> it = constraintViolations.iterator();
+        assertEquals( 1, constraintViolations.size() );
+
+        ConstraintViolation<Car> constraintViolation =
+                constraintViolations.iterator().next();
+        assertEquals(
+                "'null' is not a valid car part.",
+                constraintViolation.getMessage()
+        );
+        assertEquals( "parts[].<iterable element>",
+                constraintViolation.getPropertyPath().toString() );
     }
 }
